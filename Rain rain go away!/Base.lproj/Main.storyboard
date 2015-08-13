@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,30 +17,66 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Current weather data." translatesAutoresizingMaskIntoConstraints="NO" id="JeM-Xq-zJ3" userLabel="CurrentWeatherData">
-                                <rect key="frame" x="41" y="340" width="338" height="146"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SjM-ik-UVY" userLabel="Blue Background">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.53725490196078429" green="0.87058823529411766" blue="0.99607843137254903" alpha="0.64000000000000001" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" text="Current weather data." translatesAutoresizingMaskIntoConstraints="NO" id="JeM-Xq-zJ3" userLabel="CurrentWeatherData">
+                                <rect key="frame" x="131" y="358" width="338" height="146"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zh0-3s-qYX">
-                                <rect key="frame" x="130" y="522" width="160" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Press for location">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" text="Current location... (wait a few seconds to let it load first)" translatesAutoresizingMaskIntoConstraints="NO" id="6gv-ly-jDx" userLabel="CurrentLocation">
+                                <rect key="frame" x="180" y="181" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RAIN RAIN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDj-Vn-nwR">
+                                <rect key="frame" x="212" y="60" width="177" height="40.5"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="35"/>
+                                <color key="textColor" red="0.19215686274509802" green="0.45098039215686275" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zh0-3s-qYX">
+                                <rect key="frame" x="212" y="512" width="175" height="28"/>
+                                <color key="backgroundColor" red="0.082352941176470587" green="0.47843137254901957" blue="0.62352941176470589" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="175" id="h3O-xa-uTv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
+                                <state key="normal" title="CLICK TO REFRESH">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.53725490196078429" green="0.87058823529411766" blue="0.99607843137254903" alpha="0.64000000000000001" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="grabLocationAndWeather:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="nx8-lI-zJC"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Current location... (wait a few seconds to let it load first)" translatesAutoresizingMaskIntoConstraints="NO" id="6gv-ly-jDx">
-                                <rect key="frame" x="50" y="168" width="240" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GO AWAY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ljk-ez-Zed">
+                                <rect key="frame" x="188.5" y="91.5" width="223.5" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <color key="textColor" red="0.13333333333333333" green="0.40392156862745099" blue="0.61176470588235299" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="Ljk-ez-Zed" firstAttribute="top" secondItem="IDj-Vn-nwR" secondAttribute="bottom" constant="-9" id="5mZ-kw-Qx4"/>
+                            <constraint firstAttribute="centerX" secondItem="IDj-Vn-nwR" secondAttribute="centerX" id="TzM-mL-JJt"/>
+                            <constraint firstItem="SjM-ik-UVY" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="ahI-C5-loy"/>
+                            <constraint firstItem="IDj-Vn-nwR" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="60" id="bin-p2-epP"/>
+                            <constraint firstAttribute="centerX" secondItem="JeM-Xq-zJ3" secondAttribute="centerX" id="edV-PA-fWt"/>
+                            <constraint firstAttribute="centerX" secondItem="6gv-ly-jDx" secondAttribute="centerX" id="egd-48-qjC"/>
+                            <constraint firstItem="SjM-ik-UVY" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="jwz-hG-g8T"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="SjM-ik-UVY" secondAttribute="bottom" id="k0m-hx-k0f"/>
+                            <constraint firstAttribute="centerX" secondItem="Zh0-3s-qYX" secondAttribute="centerX" id="mym-Js-b1l"/>
+                            <constraint firstAttribute="trailing" secondItem="SjM-ik-UVY" secondAttribute="trailing" id="pUw-qb-bPv"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Zh0-3s-qYX" secondAttribute="bottom" constant="60" id="rSf-LP-QWE"/>
+                            <constraint firstAttribute="centerX" secondItem="Ljk-ez-Zed" secondAttribute="centerX" id="tal-NP-s4C"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="locationDisplay" destination="6gv-ly-jDx" id="yTw-IY-g4W"/>
@@ -48,6 +85,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="130" y="163"/>
         </scene>
     </scenes>
 </document>

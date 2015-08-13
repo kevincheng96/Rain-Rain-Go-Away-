@@ -29,10 +29,36 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet var weatherDisplay: UITextView!
     
     @IBOutlet var locationDisplay: UITextView!
-    
-    //grabs location, then grabs weather of that location
+
     @IBAction func grabLocationAndWeather(sender: AnyObject)
         // ** Do we even need a button? can put this in viewDidLoad() when app starts up
+    {
+        updateLocationAndWeather()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+         // Do any additional setup after loading the view, typically from a nib.
+
+        //Requests location services
+        locationManager.requestAlwaysAuthorization()
+        if CLLocationManager.locationServicesEnabled()
+        {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        }
+        
+        updateLocationAndWeather()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    //retrieves user location, then calls getWeatherData() to retrieve data from weather API
+    func updateLocationAndWeather() -> Void
     {
         userLocation = locationManager.location
         if CLLocationManager.locationServicesEnabled()
@@ -61,27 +87,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             locationManager.startUpdatingLocation()
         }
     }
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-         // Do any additional setup after loading the view, typically from a nib.
 
-        //Requests location services
-        locationManager.requestAlwaysAuthorization()
-        if CLLocationManager.locationServicesEnabled()
-        {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.startUpdatingLocation()
-        }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     //requests weather of user location using weather API, then updates UI
     func getWeatherData() -> Void
     {
