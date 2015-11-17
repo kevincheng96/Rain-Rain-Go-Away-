@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D78C73631B7D048B00A35AF4 /* clouds.png in Resources */ = {isa = PBXBuildFile; fileRef = D78C735F1B7D048B00A35AF4 /* clouds.png */; };
+		D78C73641B7D048B00A35AF4 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = D78C73601B7D048B00A35AF4 /* gear.png */; };
+		D78C73651B7D048B00A35AF4 /* light-raindrop-hi.png in Resources */ = {isa = PBXBuildFile; fileRef = D78C73611B7D048B00A35AF4 /* light-raindrop-hi.png */; };
+		D78C73661B7D048B00A35AF4 /* yellow-umbrella-black-handle-md.png in Resources */ = {isa = PBXBuildFile; fileRef = D78C73621B7D048B00A35AF4 /* yellow-umbrella-black-handle-md.png */; };
+		D78C736A1B7D073200A35AF4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78C73691B7D073200A35AF4 /* SettingsViewController.swift */; };
+		D78C736C1B7F67E600A35AF4 /* Helv Children.otf in Resources */ = {isa = PBXBuildFile; fileRef = D78C736B1B7F67E600A35AF4 /* Helv Children.otf */; };
+		D78C736F1B809BB500A35AF4 /* border.png in Resources */ = {isa = PBXBuildFile; fileRef = D78C736D1B809BB500A35AF4 /* border.png */; };
+		D78C73701B809BB500A35AF4 /* cloud-hi.png in Resources */ = {isa = PBXBuildFile; fileRef = D78C736E1B809BB500A35AF4 /* cloud-hi.png */; };
 		D7B1A83E1B69B76200C6E6E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B1A83D1B69B76200C6E6E2 /* AppDelegate.swift */; };
 		D7B1A8401B69B76200C6E6E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B1A83F1B69B76200C6E6E2 /* ViewController.swift */; };
 		D7B1A8431B69B76200C6E6E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7B1A8411B69B76200C6E6E2 /* Main.storyboard */; };
@@ -26,6 +34,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D78C735F1B7D048B00A35AF4 /* clouds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clouds.png; sourceTree = "<group>"; };
+		D78C73601B7D048B00A35AF4 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
+		D78C73611B7D048B00A35AF4 /* light-raindrop-hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "light-raindrop-hi.png"; sourceTree = "<group>"; };
+		D78C73621B7D048B00A35AF4 /* yellow-umbrella-black-handle-md.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yellow-umbrella-black-handle-md.png"; sourceTree = "<group>"; };
+		D78C73691B7D073200A35AF4 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		D78C736B1B7F67E600A35AF4 /* Helv Children.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Helv Children.otf"; sourceTree = "<group>"; };
+		D78C736D1B809BB500A35AF4 /* border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = border.png; sourceTree = "<group>"; };
+		D78C736E1B809BB500A35AF4 /* cloud-hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloud-hi.png"; sourceTree = "<group>"; };
 		D7B1A8381B69B76200C6E6E2 /* Rain rain go away!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rain rain go away!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7B1A83C1B69B76200C6E6E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7B1A83D1B69B76200C6E6E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +72,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D78C735E1B7D047300A35AF4 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				D78C736D1B809BB500A35AF4 /* border.png */,
+				D78C736E1B809BB500A35AF4 /* cloud-hi.png */,
+				D78C735F1B7D048B00A35AF4 /* clouds.png */,
+				D78C73601B7D048B00A35AF4 /* gear.png */,
+				D78C73611B7D048B00A35AF4 /* light-raindrop-hi.png */,
+				D78C73621B7D048B00A35AF4 /* yellow-umbrella-black-handle-md.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		D7B1A82F1B69B76100C6E6E2 = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +108,7 @@
 			children = (
 				D7B1A83D1B69B76200C6E6E2 /* AppDelegate.swift */,
 				D7B1A83F1B69B76200C6E6E2 /* ViewController.swift */,
+				D78C73691B7D073200A35AF4 /* SettingsViewController.swift */,
 				D7B1A8411B69B76200C6E6E2 /* Main.storyboard */,
 				D7B1A8441B69B76200C6E6E2 /* Images.xcassets */,
 				D7B1A8461B69B76200C6E6E2 /* LaunchScreen.xib */,
@@ -90,6 +120,8 @@
 		D7B1A83B1B69B76200C6E6E2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D78C736B1B7F67E600A35AF4 /* Helv Children.otf */,
+				D78C735E1B7D047300A35AF4 /* Images */,
 				D7B1A83C1B69B76200C6E6E2 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -192,9 +224,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D78C736C1B7F67E600A35AF4 /* Helv Children.otf in Resources */,
+				D78C73651B7D048B00A35AF4 /* light-raindrop-hi.png in Resources */,
 				D7B1A8431B69B76200C6E6E2 /* Main.storyboard in Resources */,
+				D78C73661B7D048B00A35AF4 /* yellow-umbrella-black-handle-md.png in Resources */,
+				D78C73701B809BB500A35AF4 /* cloud-hi.png in Resources */,
+				D78C736F1B809BB500A35AF4 /* border.png in Resources */,
+				D78C73641B7D048B00A35AF4 /* gear.png in Resources */,
 				D7B1A8481B69B76200C6E6E2 /* LaunchScreen.xib in Resources */,
 				D7B1A8451B69B76200C6E6E2 /* Images.xcassets in Resources */,
+				D78C73631B7D048B00A35AF4 /* clouds.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +253,7 @@
 			files = (
 				D7B1A8401B69B76200C6E6E2 /* ViewController.swift in Sources */,
 				D7B1A83E1B69B76200C6E6E2 /* AppDelegate.swift in Sources */,
+				D78C736A1B7D073200A35AF4 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,9 +376,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Rain rain go away!/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -346,9 +388,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Rain rain go away!/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -405,6 +449,7 @@
 				D7B1A8591B69B76200C6E6E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D7B1A85A1B69B76200C6E6E2 /* Build configuration list for PBXNativeTarget "Rain rain go away!Tests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +458,7 @@
 				D7B1A85C1B69B76200C6E6E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
