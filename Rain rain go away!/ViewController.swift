@@ -96,7 +96,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         {
             var userCoordinates = location.coordinate
             userLatitude = userCoordinates.latitude
-            userLongitude = userCoordinates.longitude //api uses opposite longitude coordinate
+            userLongitude = -(userCoordinates.longitude) //api uses opposite longitude coordinate
             getWeatherData()
         }
         else
