@@ -7,9 +7,7 @@
 //
 
 // ** IMPORTANT ** NEED TO MAKE SURE THE APP WORKS IN BACKGROUND, CAN SEND NOTIFICATIONS IN BACKGROUND
-// ** FIX BUG WHERE APP MAKES MORE THAN ONE API REQUEST EACH TIME
 // ** LOCATION IS NOT BEING UPDATED WHEN APP FIRST OPENS
-// ** RETURNING >48 WHEN SHOULD BE <1
 
 import UIKit
 import CoreLocation
@@ -27,11 +25,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var hourlyRainArray: [(weather: String?, time: Double?)] = [] //filtered hourlyWeatherArray
     var secondsUntilNextRain: Double? //number of seconds until next rain
     var hoursUntilNextRain: Int? //hours until next rain
-    var hoursBeforeNotification: Int! //hours prior to rain to notify user
+    var hoursBeforeNotification: Int! = 6 //hours prior to rain to notify user
+    var hoursUntilNotification: Int? = nil
     
     @IBOutlet var weatherDisplay: UITextView!
     
-    @IBOutlet var locationDisplay: UITextView!
+    @IBOutlet var statusDisplay: UITextView!
 
     @IBOutlet var hourDisplay: UITextView!
     
@@ -40,7 +39,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     {
         /*userLocation = locationManager.location
         updateLocationAndWeather() */
-        locationDisplay.text = "Please wait as we update your location"
+        statusDisplay.text = "Please wait as we update your location"
         userLocation = nil
         locationManager.startUpdatingLocation()
     }
@@ -61,7 +60,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         {
             self.locationManager.delegate = self
             self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-            self.locationManager.distanceFilter = 7500 //travel 5000 meters for location to update
+            self.locationManager.distanceFilter = 7500 //travel 7500 meters for location to update
             self.locationManager.startUpdatingLocation()
         }
     }
@@ -88,7 +87,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
         locationManager.stopUpdatingLocation()
-        locationDisplay.text = error.description
+        statusDisplay.text = error.description
     }
     
     //retrieves user location, then calls getWeatherData() to retrieve data from weather API
@@ -96,11 +95,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     {
         if CLLocationManager.locationServicesEnabled()
         {
-            locationDisplay.text = "\(userLocation) \(hoursBeforeNotification)"
+            statusDisplay.text = "\(userLocation) \(hoursBeforeNotification)"
         }
         else
         {
-            locationDisplay.text = "Location services is currently disabled"
+            statusDisplay.text = "Location services is currently disabled"
         }
         
         //if userLocation is not nil, call getWeatherData() of current location
@@ -174,11 +173,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     self.hoursUntilNextRain = nil
                 }
                 
-                if self.hoursBeforeNotification >= self.hoursUntilNextRain
+                if self.hoursBeforeNotification <= self.hoursUntilNextRain
                 {
                     self.sendNotification()
                 }
-                
+             
+            
                 //updates UI in the main thread
                 dispatch_async(dispatch_get_main_queue(), {() -> Void in
                     self.weatherDisplay.text = "\(weatherDictionary)"
@@ -187,16 +187,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     {
                         self.hourDisplay.font = self.hourDisplay.font.fontWithSize(42)
                         self.hourDisplay.text = ">48"
+                        self.statusDisplay.text = "No rain in the next two days"
                     }
                     else if self.hoursUntilNextRain < 1
                     {
                         self.hourDisplay.font = self.hourDisplay.font.fontWithSize(58)
                         self.hourDisplay.text = "<1"
+                        self.statusDisplay.text = "You will be notified in \(self.hoursUntilNotification!) hours to bring your umbrella!"
                     }
                     else
                     {
                         self.hourDisplay.font = self.hourDisplay.font.fontWithSize(58)
                         self.hourDisplay.text = "\(self.hoursUntilNextRain!)"
+                        self.statusDisplay.text = "You will be notified in \(self.hoursUntilNotification!) hours to bring your umbrella!"
+                    }
+                    
+                    if ((self.hoursBeforeNotification > self.hoursUntilNextRain) && self.hoursUntilNextRain != nil)
+                    {
+                        self.statusDisplay.text = "No local notification set because your hours before notification is greater than the time until next rain. Please adjust your value in the settings page"
                     }
                 })
             }
@@ -204,6 +212,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             {
                 dispatch_async(dispatch_get_main_queue(), {() -> Void in
                     self.weatherDisplay.text = "Could not retrieve weather data \u{2639}"
+                    self.statusDisplay.text = "Could not retrieve weather data \u{2639}"
                 })
             }
         })
@@ -212,12 +221,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
    func sendNotification()
     {
+        UIApplication.sharedApplication().cancelAllLocalNotifications() //cancel all pre-existing notifications so only one is sent
         var Notification = UILocalNotification()
         Notification.alertBody = "Bring an umbrella, it's going to rain in \(secondsUntilNextRain?) hours!"
         Notification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
         if let hourTillRain = hoursUntilNextRain
         {
-            let notificationTime = (hoursBeforeNotification - hourTillRain) * 3600
+            hoursUntilNotification = hoursUntilNextRain! - hoursBeforeNotification
+            let notificationTime = hoursUntilNotification! * 3600
             Notification.fireDate = NSDate(timeIntervalSinceNow: Double(notificationTime)) // ** NEED TO SEE IF THIS WORKS ACCURATELY
             // ** ALSO NEEDS TO MAKE SURE NOTIFICATION WILL BE SENT EVEN IF IT IS RAINING RIGHT NOW OR SOON, REGARDLESS OF THE hoursBeforeNotification
             UIApplication.sharedApplication().scheduleLocalNotification(Notification)

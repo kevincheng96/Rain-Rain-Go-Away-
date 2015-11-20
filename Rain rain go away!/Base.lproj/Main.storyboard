@@ -23,6 +23,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" text="Current weather data." translatesAutoresizingMaskIntoConstraints="NO" id="JeM-Xq-zJ3" userLabel="CurrentWeatherData">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SjM-ik-UVY" userLabel="Blue Background">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.53725490196078429" green="0.87058823529411766" blue="0.99607843137254903" alpha="0.64000000000000001" colorSpace="calibratedRGB"/>
@@ -38,6 +43,7 @@
                                 <rect key="frame" x="158" y="151" width="282.5" height="307"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="282.5" id="7qm-nX-nvE"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="282.5" id="E5J-4t-WQW"/>
                                     <constraint firstAttribute="height" constant="307" id="Hzx-rC-91L"/>
                                 </constraints>
                             </imageView>
@@ -57,7 +63,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Hzc-gb-x9X" kind="presentation" modalTransitionStyle="flipHorizontal" id="Iba-hb-J0h"/>
+                                    <segue destination="Hzc-gb-x9X" kind="presentation" identifier="settingsButtonToSettings" modalTransitionStyle="flipHorizontal" id="Iba-hb-J0h"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zh0-3s-qYX">
@@ -66,6 +72,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="203.5" id="6A4-By-uq0"/>
                                     <constraint firstAttribute="height" constant="42" id="CIR-NT-jkp"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="42" id="R71-O5-Gvr"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                 <state key="normal" title="CLICK TO REFRESH">
@@ -94,12 +101,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" text="Current weather data." translatesAutoresizingMaskIntoConstraints="NO" id="JeM-Xq-zJ3" userLabel="CurrentWeatherData">
-                                <rect key="frame" x="16" y="323" width="384" height="247"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="-" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="aXf-nT-bH0" userLabel="HourDisplay">
                                 <rect key="frame" x="187" y="200" width="92" height="74"/>
                                 <constraints>
@@ -109,8 +110,12 @@
                                 <fontDescription key="fontDescription" name="HelvChildren" family="Helv Children" pointSize="58"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" text="Grabbing current location..." translatesAutoresizingMaskIntoConstraints="NO" id="6gv-ly-jDx" userLabel="CurrentLocation">
-                                <rect key="frame" x="212" y="28" width="349" height="62"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Grabbing current location..." translatesAutoresizingMaskIntoConstraints="NO" id="6gv-ly-jDx" userLabel="StatusDisplay">
+                                <rect key="frame" x="315.5" y="288" width="150" height="170"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="170" id="Ntp-Lk-12h"/>
+                                    <constraint firstAttribute="width" constant="150" id="yK6-zs-SJv"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -118,6 +123,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="6gv-ly-jDx" firstAttribute="leading" secondItem="FEG-Xa-71v" secondAttribute="trailing" constant="-125" id="38w-pi-RER"/>
                             <constraint firstItem="Ljk-ez-Zed" firstAttribute="top" secondItem="IDj-Vn-nwR" secondAttribute="bottom" constant="-9" id="5mZ-kw-Qx4"/>
                             <constraint firstAttribute="centerX" secondItem="ifk-Lx-Nvr" secondAttribute="centerX" id="Hl0-MS-UH9"/>
                             <constraint firstAttribute="centerX" secondItem="FEG-Xa-71v" secondAttribute="centerX" id="Kfj-aC-ANT"/>
@@ -131,8 +137,8 @@
                             <constraint firstItem="pJA-Se-mun" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="12" id="aG1-7Q-mft"/>
                             <constraint firstItem="SjM-ik-UVY" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="ahI-C5-loy"/>
                             <constraint firstItem="IDj-Vn-nwR" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="90" id="bin-p2-epP"/>
+                            <constraint firstItem="Zh0-3s-qYX" firstAttribute="top" secondItem="6gv-ly-jDx" secondAttribute="bottom" constant="20" id="e88-2W-7hc"/>
                             <constraint firstAttribute="centerX" secondItem="JeM-Xq-zJ3" secondAttribute="centerX" id="edV-PA-fWt"/>
-                            <constraint firstAttribute="centerX" secondItem="6gv-ly-jDx" secondAttribute="centerX" id="egd-48-qjC"/>
                             <constraint firstItem="SjM-ik-UVY" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="jwz-hG-g8T"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="SjM-ik-UVY" secondAttribute="bottom" id="k0m-hx-k0f"/>
                             <constraint firstItem="FEG-Xa-71v" firstAttribute="top" secondItem="HiT-6K-feW" secondAttribute="bottom" constant="-52.5" id="kNt-WM-1XZ"/>
@@ -146,7 +152,7 @@
                     </view>
                     <connections>
                         <outlet property="hourDisplay" destination="aXf-nT-bH0" id="b7q-DB-LWg"/>
-                        <outlet property="locationDisplay" destination="6gv-ly-jDx" id="yTw-IY-g4W"/>
+                        <outlet property="statusDisplay" destination="6gv-ly-jDx" id="yTw-IY-g4W"/>
                         <outlet property="weatherDisplay" destination="JeM-Xq-zJ3" id="R22-ka-AFd"/>
                     </connections>
                 </viewController>
@@ -205,7 +211,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="12" minValue="0.0" maxValue="48" translatesAutoresizingMaskIntoConstraints="NO" id="beg-z7-iN6" userLabel="Hour Slider">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="6" minValue="0.0" maxValue="48" translatesAutoresizingMaskIntoConstraints="NO" id="beg-z7-iN6" userLabel="Hour Slider">
                                 <rect key="frame" x="160" y="313" width="281" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="277" id="5mL-fA-eJg"/>
@@ -222,12 +228,25 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloud-hi.png" translatesAutoresizingMaskIntoConstraints="NO" id="WZ1-JZ-RVi">
-                                <rect key="frame" x="200.5" y="138" width="199" height="127"/>
+                                <rect key="frame" x="200" y="138" width="199" height="127"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="127" id="nwn-RQ-UQQ"/>
                                     <constraint firstAttribute="width" constant="199" id="uSK-fZ-0BL"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="bottom" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PZD-IE-udY" userLabel="Settings Button">
+                                <rect key="frame" x="565" y="32" width="27" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="27" id="2u7-ii-TU1"/>
+                                    <constraint firstAttribute="height" constant="27" id="91R-q7-2e8"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="gear.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="vXZ-lx-hvc" kind="presentation" modalTransitionStyle="flipHorizontal" id="f2g-gN-O7t"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -238,6 +257,7 @@
                             <constraint firstItem="DcM-2O-BYx" firstAttribute="top" secondItem="1Pm-dY-H8G" secondAttribute="bottom" constant="-68.5" id="Cds-Ro-mCn"/>
                             <constraint firstItem="beg-z7-iN6" firstAttribute="top" secondItem="xig-3e-PI0" secondAttribute="bottom" constant="6" id="Ivv-Iv-XAw"/>
                             <constraint firstItem="b0y-Ga-DCl" firstAttribute="top" secondItem="UuO-XX-Lbg" secondAttribute="bottom" constant="-20" id="LpX-q6-c6j"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="PZD-IE-udY" secondAttribute="trailing" constant="7" id="YWZ-KN-zXc"/>
                             <constraint firstItem="DcM-2O-BYx" firstAttribute="leading" secondItem="1Pm-dY-H8G" secondAttribute="trailing" constant="-269" id="ZlH-5u-n2p"/>
                             <constraint firstAttribute="centerX" secondItem="1Pm-dY-H8G" secondAttribute="centerX" id="cvX-pE-ebQ"/>
                             <constraint firstItem="2W3-Sm-DTp" firstAttribute="top" secondItem="WCJ-ZV-fsy" secondAttribute="bottom" constant="115" id="e64-fn-MfS"/>
@@ -245,6 +265,7 @@
                             <constraint firstAttribute="centerX" secondItem="beg-z7-iN6" secondAttribute="centerX" id="fZp-RP-Bof"/>
                             <constraint firstItem="1Pm-dY-H8G" firstAttribute="top" secondItem="UuO-XX-Lbg" secondAttribute="bottom" constant="85" id="hay-oH-Lcb"/>
                             <constraint firstAttribute="centerX" secondItem="WZ1-JZ-RVi" secondAttribute="centerX" id="iwv-Yt-JXn"/>
+                            <constraint firstItem="PZD-IE-udY" firstAttribute="top" secondItem="UuO-XX-Lbg" secondAttribute="bottom" constant="12" id="m2M-La-bWX"/>
                             <constraint firstAttribute="centerX" secondItem="WCJ-ZV-fsy" secondAttribute="centerX" id="m2h-xR-GIT"/>
                             <constraint firstItem="xig-3e-PI0" firstAttribute="top" secondItem="WZ1-JZ-RVi" secondAttribute="bottom" constant="22" id="nom-bH-W9q"/>
                             <constraint firstAttribute="bottom" secondItem="b0y-Ga-DCl" secondAttribute="bottom" id="sGc-Dh-1Ho"/>
@@ -268,4 +289,7 @@
         <image name="gear.png" width="300" height="300"/>
         <image name="yellow-umbrella-black-handle-md.png" width="300" height="300"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="cPw-87-nOG"/>
+    </inferredMetricsTieBreakers>
 </document>
