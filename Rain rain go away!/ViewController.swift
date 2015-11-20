@@ -7,9 +7,9 @@
 //
 
 // ** IMPORTANT ** NEED TO MAKE SURE THE APP WORKS IN BACKGROUND, CAN SEND NOTIFICATIONS IN BACKGROUND
-// ** HOW COME LOCATION BECOMES TOKYO
 // ** FIX BUG WHERE APP MAKES MORE THAN ONE API REQUEST EACH TIME
 // ** LOCATION IS NOT BEING UPDATED WHEN APP FIRST OPENS
+// ** RETURNING >48 WHEN SHOULD BE <1
 
 import UIKit
 import CoreLocation
@@ -20,7 +20,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let defaults = NSUserDefaults.standardUserDefaults() //defaults is used to store the settings data
     let locationManager = CLLocationManager()
     private let apiKey = "1870bc9557b627988da5a8c5e0afb6cb"
-    var userLocation: CLLocation!
+    var userLocation: CLLocation! = nil
     var userLatitude: Double! //use var or let?
     var userLongitude: Double!
     var hourlyWeatherArray: [(weather: String?, time: Double?)] = [] // (weather, time)
@@ -40,7 +40,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     {
         /*userLocation = locationManager.location
         updateLocationAndWeather() */
-        locationManager.stopUpdatingLocation()
+        locationDisplay.text = "Please wait as we update your location"
+        userLocation = nil
         locationManager.startUpdatingLocation()
     }
     
@@ -74,9 +75,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         if let location = locations.last as? CLLocation //TRY FIXING THIS SO IT DOESNT CONTNUOUSLY UPDATE
         {
-            userLocation = location
-            updateLocationAndWeather()
+            if userLocation == nil {
+                userLocation = location
+                updateLocationAndWeather()
+            }
+            else
+            {
+                updateLocationAndWeather()
+            }
         }
+    }
+    
+    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+        locationManager.stopUpdatingLocation()
+        locationDisplay.text = error.description
     }
     
     //retrieves user location, then calls getWeatherData() to retrieve data from weather API

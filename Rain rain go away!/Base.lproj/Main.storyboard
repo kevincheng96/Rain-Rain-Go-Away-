@@ -94,13 +94,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" text="Current location... (wait a few seconds to let it load first)" translatesAutoresizingMaskIntoConstraints="NO" id="6gv-ly-jDx" userLabel="CurrentLocation">
-                                <rect key="frame" x="64" y="20" width="240" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" text="Current weather data." translatesAutoresizingMaskIntoConstraints="NO" id="JeM-Xq-zJ3" userLabel="CurrentWeatherData">
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" text="Current weather data." translatesAutoresizingMaskIntoConstraints="NO" id="JeM-Xq-zJ3" userLabel="CurrentWeatherData">
                                 <rect key="frame" x="16" y="323" width="384" height="247"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -113,6 +107,11 @@
                                     <constraint firstAttribute="height" constant="74" id="uuF-e4-4mI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelvChildren" family="Helv Children" pointSize="58"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" text="Grabbing current location..." translatesAutoresizingMaskIntoConstraints="NO" id="6gv-ly-jDx" userLabel="CurrentLocation">
+                                <rect key="frame" x="212" y="28" width="349" height="62"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
