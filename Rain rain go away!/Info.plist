@@ -23,7 +23,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Please allow us to use your location.</string>
+	<string>We need to track your location changes to warn you of regional weather changes.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Please allow us to use your location.</string>
 	<key>UIAppFonts</key>

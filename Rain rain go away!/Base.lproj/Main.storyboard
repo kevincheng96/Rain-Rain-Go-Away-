@@ -98,7 +98,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOURS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2jW-0J-3Sf">
                                 <rect key="frame" x="274" y="220" width="118" height="33"/>
                                 <fontDescription key="fontDescription" name="HelvChildren" family="Helv Children" pointSize="33"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="-" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="aXf-nT-bH0" userLabel="HourDisplay">
@@ -110,21 +110,22 @@
                                 <fontDescription key="fontDescription" name="HelvChildren" family="Helv Children" pointSize="58"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Grabbing current location..." translatesAutoresizingMaskIntoConstraints="NO" id="6gv-ly-jDx" userLabel="StatusDisplay">
-                                <rect key="frame" x="315.5" y="288" width="150" height="170"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Grabbing current location..." translatesAutoresizingMaskIntoConstraints="NO" id="6gv-ly-jDx" userLabel="StatusDisplay">
+                                <rect key="frame" x="314.5" y="11" width="200" height="71"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="170" id="Ntp-Lk-12h"/>
-                                    <constraint firstAttribute="width" constant="150" id="yK6-zs-SJv"/>
+                                    <constraint firstAttribute="height" constant="71" id="CSk-xP-f9r"/>
+                                    <constraint firstAttribute="width" constant="200" id="PrM-dr-eQw"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                <color key="textColor" red="0.013653232458335829" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="6gv-ly-jDx" firstAttribute="leading" secondItem="FEG-Xa-71v" secondAttribute="trailing" constant="-125" id="38w-pi-RER"/>
                             <constraint firstItem="Ljk-ez-Zed" firstAttribute="top" secondItem="IDj-Vn-nwR" secondAttribute="bottom" constant="-9" id="5mZ-kw-Qx4"/>
+                            <constraint firstItem="pJA-Se-mun" firstAttribute="leading" secondItem="6gv-ly-jDx" secondAttribute="trailing" constant="35.5" id="8M4-mv-4FN"/>
                             <constraint firstAttribute="centerX" secondItem="ifk-Lx-Nvr" secondAttribute="centerX" id="Hl0-MS-UH9"/>
                             <constraint firstAttribute="centerX" secondItem="FEG-Xa-71v" secondAttribute="centerX" id="Kfj-aC-ANT"/>
                             <constraint firstItem="ifk-Lx-Nvr" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="-20" id="Kiq-Jk-zc0"/>
@@ -134,10 +135,10 @@
                             <constraint firstAttribute="centerX" secondItem="HiT-6K-feW" secondAttribute="centerX" id="Uon-MG-h4z"/>
                             <constraint firstItem="2jW-0J-3Sf" firstAttribute="top" secondItem="HiT-6K-feW" secondAttribute="bottom" constant="17" id="Ur9-l4-kzA"/>
                             <constraint firstItem="2jW-0J-3Sf" firstAttribute="leading" secondItem="FEG-Xa-71v" secondAttribute="trailing" constant="-166.5" id="WyT-ac-4lD"/>
+                            <constraint firstItem="IDj-Vn-nwR" firstAttribute="top" secondItem="6gv-ly-jDx" secondAttribute="bottom" constant="8" id="XSa-98-bxz"/>
                             <constraint firstItem="pJA-Se-mun" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="12" id="aG1-7Q-mft"/>
                             <constraint firstItem="SjM-ik-UVY" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="ahI-C5-loy"/>
                             <constraint firstItem="IDj-Vn-nwR" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="90" id="bin-p2-epP"/>
-                            <constraint firstItem="Zh0-3s-qYX" firstAttribute="top" secondItem="6gv-ly-jDx" secondAttribute="bottom" constant="20" id="e88-2W-7hc"/>
                             <constraint firstAttribute="centerX" secondItem="JeM-Xq-zJ3" secondAttribute="centerX" id="edV-PA-fWt"/>
                             <constraint firstItem="SjM-ik-UVY" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="jwz-hG-g8T"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="SjM-ik-UVY" secondAttribute="bottom" id="k0m-hx-k0f"/>

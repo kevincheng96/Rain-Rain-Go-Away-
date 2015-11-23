@@ -95,7 +95,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     {
         if CLLocationManager.locationServicesEnabled()
         {
-            statusDisplay.text = "\(userLocation) \(hoursBeforeNotification)"
+            statusDisplay.text = "Location obtained. Retrieving weather data..."
         }
         else
         {
@@ -221,15 +221,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
    func sendNotification()
     {
-        UIApplication.sharedApplication().cancelAllLocalNotifications() //cancel all pre-existing notifications so only one is sent
         var Notification = UILocalNotification()
-        Notification.alertBody = "Bring an umbrella, it's going to rain in \(secondsUntilNextRain?) hours!"
-        Notification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
         if let hourTillRain = hoursUntilNextRain
         {
+            UIApplication.sharedApplication().cancelAllLocalNotifications() //cancel all pre-existing notifications so only one is sent
             hoursUntilNotification = hoursUntilNextRain! - hoursBeforeNotification
             let notificationTime = hoursUntilNotification! * 3600
-            Notification.fireDate = NSDate(timeIntervalSinceNow: Double(notificationTime)) // ** NEED TO SEE IF THIS WORKS ACCURATELY
+            Notification.fireDate = NSDate(timeIntervalSinceNow: Double(notificationTime) + 5)
+            Notification.alertBody = "Bring an umbrella, it's going to rain in \(hoursBeforeNotification!) hours!"
+            Notification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
             // ** ALSO NEEDS TO MAKE SURE NOTIFICATION WILL BE SENT EVEN IF IT IS RAINING RIGHT NOW OR SOON, REGARDLESS OF THE hoursBeforeNotification
             UIApplication.sharedApplication().scheduleLocalNotification(Notification)
         }
