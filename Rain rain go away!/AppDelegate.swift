@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Badge, categories: nil)) //NEED TO ONLY CALL THIS ONCE, AND ALSO RESET BADGE
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge], categories: nil)) //NEED TO ONLY CALL THIS ONCE, AND ALSO RESET BADGE
         
         return true
     }

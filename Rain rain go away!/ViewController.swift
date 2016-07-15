@@ -8,6 +8,10 @@
 
 // ** IMPORTANT ** NEED TO MAKE SURE THE APP WORKS IN BACKGROUND, CAN SEND NOTIFICATIONS IN BACKGROUND
 // ** LOCATION IS NOT BEING UPDATED WHEN APP FIRST OPENS
+// ******** ANOTHER IDEA:
+// Instead of having the user choose hours before rain for notification, have the user set a time to be
+// notified. So morning, evening, or night. This is because the user leaves the house at that time and
+// should be reminded to bring an umbrella when leaving the house
 
 import UIKit
 import CoreLocation
@@ -40,6 +44,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         /*userLocation = locationManager.location
         updateLocationAndWeather() */
         statusDisplay.text = "Please wait as we update your location"
+        hourDisplay.text = "??"
         userLocation = nil
         locationManager.startUpdatingLocation()
     }
@@ -49,6 +54,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
          // Do any additional setup after loading the view, typically from a nib.
 
         //Requests location services
+        if #available(iOS 9.0, *) {
+            locationManager.allowsBackgroundLocationUpdates = true
+        } else {
+            // Fallback on earlier versions
+        }
         locationManager.requestAlwaysAuthorization()
         
         /* let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(4 * Double(NSEC_PER_SEC)))
@@ -60,7 +70,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         {
             self.locationManager.delegate = self
             self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-            self.locationManager.distanceFilter = 7500 //travel 7500 meters for location to update
+            self.locationManager.distanceFilter = 5000 //travel 5000 meters for location to update
             self.locationManager.startUpdatingLocation()
         }
     }
@@ -71,17 +81,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     //calls weather API and updates UI when location is updated
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        if let location = locations.last as? CLLocation //TRY FIXING THIS SO IT DOESNT CONTNUOUSLY UPDATE
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if userLocation == nil {
+            userLocation = locations[0]
+            updateLocationAndWeather()
+        }
+        else
         {
-            if userLocation == nil {
-                userLocation = location
-                updateLocationAndWeather()
-            }
-            else
-            {
-                updateLocationAndWeather()
-            }
+            updateLocationAndWeather()
         }
     }
     
@@ -105,7 +112,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         //if userLocation is not nil, call getWeatherData() of current location
         if let location = userLocation
         {
-            var userCoordinates = location.coordinate
+            let userCoordinates = location.coordinate
             userLatitude = userCoordinates.latitude
             userLongitude = -(userCoordinates.longitude) //api uses opposite longitude coordinate
             getWeatherData()
@@ -130,83 +137,88 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let dataTask: NSURLSessionDataTask = sharedSession.dataTaskWithURL(url!, completionHandler: {(data, response, error) -> Void in
             if (error == nil)
             {
-                let weatherDictionary: NSDictionary = NSJSONSerialization.JSONObjectWithData(data!, options: nil, error: nil) as NSDictionary
-                
-                //parse (weather, time) to hourlyWeatherArray
-                if let hourlyDataBlock = weatherDictionary["hourly"] as? NSDictionary
-                {
-                    if let dataArray = hourlyDataBlock["data"] as? NSArray
-                    {
-                        for hour in dataArray //loop through data for each hour
+                do {
+                    if let weatherDictionary: NSDictionary = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as! NSDictionary {
+                        //parse (weather, time) to hourlyWeatherArray
+                        if let hourlyDataBlock = weatherDictionary["hourly"] as? NSDictionary
                         {
-                            var hourlyData = hour as? NSDictionary
-                            var weatherIcon = hour["icon"] as? String
-                            var weatherHour = hour["time"] as? Double
-                            var weatherTuple = (weatherIcon, weatherHour)
-                            self.hourlyWeatherArray += [weatherTuple]
-                            // ** MIGHT BE RE-LOOPING THIS, SINCE ARRAY KEEPS GROWING
+                            if let dataArray = hourlyDataBlock["data"] as? NSArray
+                            {
+                                for hour in dataArray //loop through data for each hour
+                                {
+                                    let hourlyData = hour as? NSDictionary
+                                    let weatherIcon = hour["icon"] as? String
+                                    let weatherHour = hour["time"] as? Double
+                                    let weatherTuple = (weatherIcon, weatherHour)
+                                    self.hourlyWeatherArray += [weatherTuple]
+                                    // ** MIGHT BE RE-LOOPING THIS, SINCE ARRAY KEEPS GROWING
+                                }
+                            }
                         }
-                    }
-                }
-                
-                //filter out hourly weather data that is not rain
-                self.hourlyRainArray = self.hourlyWeatherArray.filter({$0.weather == "rain" || $0.weather == "thunderstorm"}) //need to change to "rain"
-                
-                //checks if there is rain in the next hours (if hourlyRainArray is not empty)
-                if self.hourlyRainArray.isEmpty == false
-                {
-                    let currentUnixTime = NSDate().timeIntervalSince1970
-                    for hour in self.hourlyRainArray
-                    {
-                        //finds the next rain hour that is in the future (in case API forecast is not updated)
-                        var nextHour = hour.time
-                        if hour.time > currentUnixTime
+                        
+                        //filter out hourly weather data that is not rain
+                        self.hourlyRainArray = self.hourlyWeatherArray.filter({$0.weather == "rain" || $0.weather == "thunderstorm"}) //need to change to "rain"
+                        
+                        //checks if there is rain in the next hours (if hourlyRainArray is not empty)
+                        if self.hourlyRainArray.isEmpty == false
                         {
-                            self.secondsUntilNextRain = (nextHour! - currentUnixTime) / 3600 //hours until rain
-                            self.hoursUntilNextRain = Int(round(self.secondsUntilNextRain!))
-                            break
+                            let currentUnixTime = NSDate().timeIntervalSince1970
+                            for hour in self.hourlyRainArray
+                            {
+                                //finds the next rain hour that is in the future (in case API forecast is not updated)
+                                let nextHour = hour.time
+                                if hour.time > currentUnixTime
+                                {
+                                    self.secondsUntilNextRain = (nextHour! - currentUnixTime) / 3600 //hours until rain
+                                    self.hoursUntilNextRain = Int(round(self.secondsUntilNextRain!))
+                                    break
+                                }
+                            }
                         }
+                        else
+                        {
+                            self.hoursUntilNextRain = nil
+                        }
+                        
+                        if self.hoursBeforeNotification <= self.hoursUntilNextRain
+                        {
+                            self.sendNotification()
+                        }
+                        
+                        
+                        //updates UI in the main thread
+                        dispatch_async(dispatch_get_main_queue(), {() -> Void in
+                            self.weatherDisplay.text = "\(weatherDictionary)"
+                            
+                            if self.hoursUntilNextRain == nil
+                            {
+                                self.hourDisplay.font = self.hourDisplay.font!.fontWithSize(42)
+                                self.hourDisplay.text = ">48"
+                                self.statusDisplay.text = "No rain in the next two days"
+                            }
+                            else if self.hoursUntilNextRain < 1
+                            {
+                                self.hourDisplay.font = self.hourDisplay.font!.fontWithSize(58)
+                                self.hourDisplay.text = "<1"
+                                self.statusDisplay.text = "You will be notified in \(self.hoursUntilNotification!) hours to bring your umbrella!"
+                            }
+                            else
+                            {
+                                self.hourDisplay.font = self.hourDisplay.font!.fontWithSize(58)
+                                self.hourDisplay.text = "\(self.hoursUntilNextRain!)"
+                                self.statusDisplay.text = "You will be notified in \(self.hoursUntilNotification!) hours to bring your umbrella!"
+                            }
+                            
+                            if ((self.hoursBeforeNotification > self.hoursUntilNextRain) && self.hoursUntilNextRain != nil)
+                            {
+                                self.statusDisplay.text = "No local notification set because your hours before notification is greater than the time until next rain. Please adjust your value in the settings page"
+                            }
+                        })
                     }
+                } catch let error as NSError {
+                    print(error.localizedDescription)
+                    return
                 }
-                else
-                {
-                    self.hoursUntilNextRain = nil
-                }
-                
-                if self.hoursBeforeNotification <= self.hoursUntilNextRain
-                {
-                    self.sendNotification()
-                }
-             
-            
-                //updates UI in the main thread
-                dispatch_async(dispatch_get_main_queue(), {() -> Void in
-                    self.weatherDisplay.text = "\(weatherDictionary)"
-                    
-                    if self.hoursUntilNextRain == nil
-                    {
-                        self.hourDisplay.font = self.hourDisplay.font.fontWithSize(42)
-                        self.hourDisplay.text = ">48"
-                        self.statusDisplay.text = "No rain in the next two days"
-                    }
-                    else if self.hoursUntilNextRain < 1
-                    {
-                        self.hourDisplay.font = self.hourDisplay.font.fontWithSize(58)
-                        self.hourDisplay.text = "<1"
-                        self.statusDisplay.text = "You will be notified in \(self.hoursUntilNotification!) hours to bring your umbrella!"
-                    }
-                    else
-                    {
-                        self.hourDisplay.font = self.hourDisplay.font.fontWithSize(58)
-                        self.hourDisplay.text = "\(self.hoursUntilNextRain!)"
-                        self.statusDisplay.text = "You will be notified in \(self.hoursUntilNotification!) hours to bring your umbrella!"
-                    }
-                    
-                    if ((self.hoursBeforeNotification > self.hoursUntilNextRain) && self.hoursUntilNextRain != nil)
-                    {
-                        self.statusDisplay.text = "No local notification set because your hours before notification is greater than the time until next rain. Please adjust your value in the settings page"
-                    }
-                })
             }
             else
             {
@@ -227,7 +239,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             UIApplication.sharedApplication().cancelAllLocalNotifications() //cancel all pre-existing notifications so only one is sent
             hoursUntilNotification = hoursUntilNextRain! - hoursBeforeNotification
             let notificationTime = hoursUntilNotification! * 3600
-            Notification.fireDate = NSDate(timeIntervalSinceNow: Double(notificationTime) + 5)
+            Notification.fireDate = NSDate(timeIntervalSinceNow: Double(notificationTime) + 10)
             Notification.alertBody = "Bring an umbrella, it's going to rain in \(hoursBeforeNotification!) hours!"
             Notification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
             // ** ALSO NEEDS TO MAKE SURE NOTIFICATION WILL BE SENT EVEN IF IT IS RAINING RIGHT NOW OR SOON, REGARDLESS OF THE hoursBeforeNotification
