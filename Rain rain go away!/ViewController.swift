@@ -40,13 +40,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBAction func grabLocationAndWeather(sender: AnyObject)
         // ** Do we even need a button? can put this in viewDidLoad() when app starts up
+        // ** DON'T actually need this button, can get rid of in future versions
     {
         /*userLocation = locationManager.location
         updateLocationAndWeather() */
         statusDisplay.text = "Please wait as we update your location"
-        hourDisplay.text = "??"
+        hourDisplay.text = "-"
         userLocation = nil
-        locationManager.startUpdatingLocation()
+        if userLatitude != nil && userLongitude != nil {
+            getWeatherData()
+        } else {
+            locationManager.stopUpdatingLocation()
+            locationManager.startUpdatingLocation()
+        }
     }
     
     override func viewDidLoad() {
@@ -70,7 +76,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         {
             self.locationManager.delegate = self
             self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-            self.locationManager.distanceFilter = 5000 //travel 5000 meters for location to update
+            self.locationManager.distanceFilter = 2500 //travel 5000 meters for location to update
             self.locationManager.startUpdatingLocation()
         }
     }
