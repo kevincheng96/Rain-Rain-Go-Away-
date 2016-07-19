@@ -15,6 +15,53 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "17"
             endingLineNumber = "17">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Rain_rain_go_away_.ViewController.__deallocating_deinit"
+                  moduleName = "Rain rain go away!"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Kevincheng96/Documents/Coding%20Projects/XCode%20Apps/Rain%20rain%20go%20away!/Rain%20rain%20go%20away!/ViewController.swift"
+                  timestampString = "490655376.334876"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Rain_rain_go_away_.ViewController.init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.NSBundle&gt;) -&gt; Rain_rain_go_away_.ViewController"
+                  moduleName = "Rain rain go away!"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Kevincheng96/Documents/Coding%20Projects/XCode%20Apps/Rain%20rain%20go%20away!/Rain%20rain%20go%20away!/ViewController.swift"
+                  timestampString = "490655376.335004"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Rain_rain_go_away_.ViewController.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;Rain_rain_go_away_.ViewController&gt;"
+                  moduleName = "Rain rain go away!"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Kevincheng96/Documents/Coding%20Projects/XCode%20Apps/Rain%20rain%20go%20away!/Rain%20rain%20go%20away!/ViewController.swift"
+                  timestampString = "490655376.335096"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

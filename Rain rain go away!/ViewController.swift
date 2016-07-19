@@ -90,14 +90,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     //calls weather API and updates UI when location is updated
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if userLocation == nil {
-            userLocation = locations[0]
-            updateLocationAndWeather()
-        }
-        else
-        {
-            updateLocationAndWeather()
-        }
+        userLocation = locations[0]
+        updateLocationAndWeather()
     }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
@@ -122,7 +116,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         {
             let userCoordinates = location.coordinate
             userLatitude = userCoordinates.latitude
-            userLongitude = -(userCoordinates.longitude) //api uses opposite longitude coordinate
+            userLongitude = userCoordinates.longitude //api uses opposite longitude coordinate
             getWeatherData()
         }
         else
