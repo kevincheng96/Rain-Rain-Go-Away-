@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Helv Children.otf">
@@ -25,6 +26,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" text="Current weather data." translatesAutoresizingMaskIntoConstraints="NO" id="JeM-Xq-zJ3" userLabel="CurrentWeatherData">
+                                <rect key="frame" x="300" y="4" width="0.0" height="4"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -54,11 +56,11 @@
                                 <color key="textColor" red="0.1333333333" green="0.4039215686" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="bottom" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pJA-Se-mun" userLabel="Settings Button">
-                                <rect key="frame" x="550" y="32" width="27" height="27"/>
+                            <button opaque="NO" contentMode="bottom" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pJA-Se-mun" userLabel="Settings Button">
+                                <rect key="frame" x="538" y="32" width="35" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="27" id="CWg-QF-zOo"/>
-                                    <constraint firstAttribute="width" constant="27" id="pBS-79-3nc"/>
+                                    <constraint firstAttribute="height" constant="35" id="CWg-QF-zOo"/>
+                                    <constraint firstAttribute="width" constant="35" id="pBS-79-3nc"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="gear.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -111,8 +113,8 @@
                                 <fontDescription key="fontDescription" name="HelvChildren" family="Helv Children" pointSize="58"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" text="Grabbing current location..." translatesAutoresizingMaskIntoConstraints="NO" id="6gv-ly-jDx" userLabel="StatusDisplay">
-                                <rect key="frame" x="314.5" y="11" width="200" height="71"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Grabbing current location..." translatesAutoresizingMaskIntoConstraints="NO" id="6gv-ly-jDx" userLabel="StatusDisplay">
+                                <rect key="frame" x="302.5" y="11" width="200" height="71"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="71" id="CSk-xP-f9r"/>
                                     <constraint firstAttribute="width" constant="200" id="PrM-dr-eQw"/>
@@ -179,7 +181,7 @@
                                 <color key="backgroundColor" red="0.53725490200000003" green="0.87058823529999996" blue="0.99607843139999996" alpha="0.64000000000000001" colorSpace="calibratedRGB"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WCJ-ZV-fsy">
-                                <rect key="frame" x="235" y="449" width="130" height="36"/>
+                                <rect key="frame" x="235" y="459" width="130" height="36"/>
                                 <color key="backgroundColor" red="0.082352941176470587" green="0.47843137254901957" blue="0.62352941176470589" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="130" id="1e6-v7-niB"/>
@@ -207,14 +209,8 @@
                                     <constraint firstAttribute="width" constant="299" id="ypv-r0-pYm"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slider Value" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mAR-2X-EHg" userLabel="Slider Value">
-                                <rect key="frame" x="213" y="355" width="173" height="38.5"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="33"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="6" minValue="0.0" maxValue="48" translatesAutoresizingMaskIntoConstraints="NO" id="beg-z7-iN6" userLabel="Hour Slider">
-                                <rect key="frame" x="160" y="313" width="281" height="31"/>
+                                <rect key="frame" x="160" y="289" width="281" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="277" id="5mL-fA-eJg"/>
                                     <constraint firstAttribute="height" constant="30" id="arF-gr-Mue"/>
@@ -223,24 +219,24 @@
                                     <action selector="hourSliderValueChange:" destination="Hzc-gb-x9X" eventType="valueChanged" id="FHQ-sB-7i2"/>
                                 </connections>
                             </slider>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# of hours to be notified ahead of time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xig-3e-PI0">
-                                <rect key="frame" x="154" y="287" width="291" height="19.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# hours ahead of time to be notified " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xig-3e-PI0">
+                                <rect key="frame" x="161.5" y="263" width="276" height="20"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloud-hi.png" translatesAutoresizingMaskIntoConstraints="NO" id="WZ1-JZ-RVi">
-                                <rect key="frame" x="200" y="138" width="199" height="127"/>
+                                <rect key="frame" x="200" y="114" width="199" height="127"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="127" id="nwn-RQ-UQQ"/>
                                     <constraint firstAttribute="width" constant="199" id="uSK-fZ-0BL"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="bottom" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PZD-IE-udY" userLabel="Settings Button">
-                                <rect key="frame" x="565" y="32" width="27" height="27"/>
+                            <button opaque="NO" contentMode="bottom" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PZD-IE-udY" userLabel="Settings Button">
+                                <rect key="frame" x="538" y="32" width="35" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="27" id="2u7-ii-TU1"/>
-                                    <constraint firstAttribute="height" constant="27" id="91R-q7-2e8"/>
+                                    <constraint firstAttribute="width" constant="35" id="2u7-ii-TU1"/>
+                                    <constraint firstAttribute="height" constant="35" id="91R-q7-2e8"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="gear.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -249,39 +245,66 @@
                                     <segue destination="vXZ-lx-hvc" kind="presentation" modalTransitionStyle="flipHorizontal" id="f2g-gN-O7t"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receive Notifications?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UfE-IQ-awf">
+                                <rect key="frame" x="109.5" y="399" width="171.5" height="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d09-Op-NIs">
+                                <rect key="frame" x="425.5" y="393" width="51" height="31"/>
+                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="onTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="notificationSwitchPressed:" destination="Hzc-gb-x9X" eventType="valueChanged" id="9u1-uG-C89"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slider Value" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mAR-2X-EHg" userLabel="Slider Value">
+                                <rect key="frame" x="213" y="331" width="173" height="38.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="33"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="xig-3e-PI0" secondAttribute="centerX" id="2rP-Xr-fQ3"/>
                             <constraint firstAttribute="centerX" secondItem="mAR-2X-EHg" secondAttribute="centerX" id="3so-qr-HLb"/>
                             <constraint firstAttribute="trailing" secondItem="b0y-Ga-DCl" secondAttribute="trailing" id="7gu-hM-RkZ"/>
-                            <constraint firstItem="WCJ-ZV-fsy" firstAttribute="top" secondItem="beg-z7-iN6" secondAttribute="bottom" constant="106" id="ASG-Fx-peO"/>
+                            <constraint firstItem="WCJ-ZV-fsy" firstAttribute="top" secondItem="beg-z7-iN6" secondAttribute="bottom" constant="140" id="ASG-Fx-peO"/>
+                            <constraint firstItem="UfE-IQ-awf" firstAttribute="centerX" secondItem="YZ5-Qc-8gq" secondAttribute="centerX" multiplier="0.65" id="BcG-sB-O6Z"/>
                             <constraint firstItem="DcM-2O-BYx" firstAttribute="top" secondItem="1Pm-dY-H8G" secondAttribute="bottom" constant="-68.5" id="Cds-Ro-mCn"/>
                             <constraint firstItem="beg-z7-iN6" firstAttribute="top" secondItem="xig-3e-PI0" secondAttribute="bottom" constant="6" id="Ivv-Iv-XAw"/>
                             <constraint firstItem="b0y-Ga-DCl" firstAttribute="top" secondItem="UuO-XX-Lbg" secondAttribute="bottom" constant="-20" id="LpX-q6-c6j"/>
+                            <constraint firstItem="WCJ-ZV-fsy" firstAttribute="top" secondItem="d09-Op-NIs" secondAttribute="bottom" constant="35" id="W8a-8h-PMo"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PZD-IE-udY" secondAttribute="trailing" constant="7" id="YWZ-KN-zXc"/>
                             <constraint firstItem="DcM-2O-BYx" firstAttribute="leading" secondItem="1Pm-dY-H8G" secondAttribute="trailing" constant="-269" id="ZlH-5u-n2p"/>
+                            <constraint firstItem="2W3-Sm-DTp" firstAttribute="top" secondItem="WCJ-ZV-fsy" secondAttribute="bottom" constant="105" id="b86-jW-NG6"/>
+                            <constraint firstItem="2W3-Sm-DTp" firstAttribute="top" secondItem="WCJ-ZV-fsy" secondAttribute="bottom" constant="105" id="bbM-er-Mwo"/>
                             <constraint firstAttribute="centerX" secondItem="1Pm-dY-H8G" secondAttribute="centerX" id="cvX-pE-ebQ"/>
-                            <constraint firstItem="2W3-Sm-DTp" firstAttribute="top" secondItem="WCJ-ZV-fsy" secondAttribute="bottom" constant="115" id="e64-fn-MfS"/>
+                            <constraint firstItem="2W3-Sm-DTp" firstAttribute="top" secondItem="WCJ-ZV-fsy" secondAttribute="bottom" constant="105" id="e64-fn-MfS"/>
                             <constraint firstItem="b0y-Ga-DCl" firstAttribute="leading" secondItem="YZ5-Qc-8gq" secondAttribute="leading" id="fNk-cm-1CT"/>
                             <constraint firstAttribute="centerX" secondItem="beg-z7-iN6" secondAttribute="centerX" id="fZp-RP-Bof"/>
                             <constraint firstItem="1Pm-dY-H8G" firstAttribute="top" secondItem="UuO-XX-Lbg" secondAttribute="bottom" constant="85" id="hay-oH-Lcb"/>
+                            <constraint firstItem="WCJ-ZV-fsy" firstAttribute="top" secondItem="UfE-IQ-awf" secondAttribute="bottom" constant="40" id="it6-oq-8Rd"/>
                             <constraint firstAttribute="centerX" secondItem="WZ1-JZ-RVi" secondAttribute="centerX" id="iwv-Yt-JXn"/>
                             <constraint firstItem="PZD-IE-udY" firstAttribute="top" secondItem="UuO-XX-Lbg" secondAttribute="bottom" constant="12" id="m2M-La-bWX"/>
                             <constraint firstAttribute="centerX" secondItem="WCJ-ZV-fsy" secondAttribute="centerX" id="m2h-xR-GIT"/>
                             <constraint firstItem="xig-3e-PI0" firstAttribute="top" secondItem="WZ1-JZ-RVi" secondAttribute="bottom" constant="22" id="nom-bH-W9q"/>
                             <constraint firstAttribute="bottom" secondItem="b0y-Ga-DCl" secondAttribute="bottom" id="sGc-Dh-1Ho"/>
                             <constraint firstItem="mAR-2X-EHg" firstAttribute="top" secondItem="beg-z7-iN6" secondAttribute="bottom" constant="12" id="vbh-pc-prT"/>
+                            <constraint firstItem="d09-Op-NIs" firstAttribute="centerX" secondItem="YZ5-Qc-8gq" secondAttribute="centerX" multiplier="1.5" id="zSr-3V-iCG"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="hourLabel" destination="mAR-2X-EHg" id="qr5-Ce-JCD"/>
                         <outlet property="hourSlider" destination="beg-z7-iN6" id="FAS-sR-Ykm"/>
+                        <outlet property="notificationSwitch" destination="d09-Op-NIs" id="gna-vN-jCq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iCk-IK-YFg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="623" y="115"/>
+            <point key="canvasLocation" x="584" y="43"/>
         </scene>
     </scenes>
     <resources>

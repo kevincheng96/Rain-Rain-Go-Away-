@@ -37,7 +37,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet var weatherDisplay: UITextView!
     
     @IBOutlet var statusDisplay: UITextView!
-
+    
     @IBOutlet var hourDisplay: UITextView!
     
     @IBAction func grabLocationAndWeather(sender: AnyObject)
@@ -45,7 +45,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         // ** DON'T actually need this button, can get rid of in future versions
     {
         /*userLocation = locationManager.location
-        updateLocationAndWeather() */
+         updateLocationAndWeather() */
         statusDisplay.text = "Please wait as we update your location"
         hourDisplay.text = "-"
         userLocation = nil
@@ -59,8 +59,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         // Do any additional setup after loading the view, typically from a nib.
-
+        // Do any additional setup after loading the view, typically from a nib.
+        
         //Requests location services
         if #available(iOS 9.0, *) {
             locationManager.allowsBackgroundLocationUpdates = true
@@ -70,7 +70,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.requestAlwaysAuthorization()
         
         /* let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(4 * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()){} */
+         dispatch_after(delayTime, dispatch_get_main_queue()){} */
         
         hoursBeforeNotification = defaults.integerForKey("hoursBeforeNotification")
         
@@ -100,7 +100,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
         locationManager.stopUpdatingLocation()
         statusDisplay.text = error.description
     }
@@ -122,7 +122,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         {
             let userCoordinates = location.coordinate
             userLatitude = userCoordinates.latitude
-            userLongitude = userCoordinates.longitude
+            userLongitude = -(userCoordinates.longitude) //api uses opposite longitude coordinate
             getWeatherData()
         }
         else
@@ -134,7 +134,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             locationManager.startUpdatingLocation()
         }
     }
-
+    
     //requests weather of user location using weather API, then updates UI
     func getWeatherData() -> Void
     {
@@ -245,26 +245,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         // using an UNSAFE method right now
         // read http://stackoverflow.com/questions/31254725/transport-security-has-blocked-a-cleartext-http
         // to make changes later on!
-            //            let url_string = String(urlLabel.text!) + "/updateDeviceLocation"
+        //            let url_string = String(urlLabel.text!) + "/updateDeviceLocation"
         let url_string = String("http://rain-rain-go-away.herokuapp.com/api/updateDeviceLocation")
         let url = NSURL(string: url_string)
         let request = NSMutableURLRequest(URL: url!)
         request.HTTPMethod = "POST"
         let lat = String(coordinates.0)
         let long = String(coordinates.1)
-            
+        
         let data = ("latitude=" + lat + "&longitude=" + long + "&deviceID=" + uuid + "&deviceName=" + deviceName).dataUsingEncoding(NSUTF8StringEncoding)
-            
+        
         let task = NSURLSession.sharedSession().uploadTaskWithRequest(request, fromData: data!)
-            
+        
         task.resume()
         print("sent coordinates!")
     }
-
     
     func sendNotification()
     {
-        let Notification = UILocalNotification()
+        var Notification = UILocalNotification()
         if let hourTillRain = hoursUntilNextRain
         {
             UIApplication.sharedApplication().cancelAllLocalNotifications() //cancel all pre-existing notifications so only one is sent
@@ -278,4 +277,3 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
 }
-
