@@ -31,6 +31,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var hoursUntilNextRain: Int? //hours until next rain
     var hoursBeforeNotification: Int! = 6 //hours prior to rain to notify user
     var hoursUntilNotification: Int? = nil
+    let deviceName: String = UIDevice.currentDevice().name // device's name
+    let uuid: String = UIDevice.currentDevice().identifierForVendor!.UUIDString // user iPhone's UUID
     
     @IBOutlet var weatherDisplay: UITextView!
     
@@ -98,7 +100,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         locationManager.stopUpdatingLocation()
         statusDisplay.text = error.description
     }
@@ -120,7 +122,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         {
             let userCoordinates = location.coordinate
             userLatitude = userCoordinates.latitude
-            userLongitude = -(userCoordinates.longitude) //api uses opposite longitude coordinate
+            userLongitude = userCoordinates.longitude
             getWeatherData()
         }
         else
@@ -235,11 +237,34 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             }
         })
         dataTask.resume()
+        sendCoordinates((userLatitude, userLongitude))
     }
     
-   func sendNotification()
+    // Sends user's coordinates to the express server to store in a mongolabs db
+    func sendCoordinates(coordinates: (Double, Double)) {
+        // using an UNSAFE method right now
+        // read http://stackoverflow.com/questions/31254725/transport-security-has-blocked-a-cleartext-http
+        // to make changes later on!
+            //            let url_string = String(urlLabel.text!) + "/updateDeviceLocation"
+        let url_string = String("http://rain-rain-go-away.herokuapp.com/api/updateDeviceLocation")
+        let url = NSURL(string: url_string)
+        let request = NSMutableURLRequest(URL: url!)
+        request.HTTPMethod = "POST"
+        let lat = String(coordinates.0)
+        let long = String(coordinates.1)
+            
+        let data = ("latitude=" + lat + "&longitude=" + long + "&deviceID=" + uuid + "&deviceName=" + deviceName).dataUsingEncoding(NSUTF8StringEncoding)
+            
+        let task = NSURLSession.sharedSession().uploadTaskWithRequest(request, fromData: data!)
+            
+        task.resume()
+        print("sent coordinates!")
+    }
+
+    
+    func sendNotification()
     {
-        var Notification = UILocalNotification()
+        let Notification = UILocalNotification()
         if let hourTillRain = hoursUntilNextRain
         {
             UIApplication.sharedApplication().cancelAllLocalNotifications() //cancel all pre-existing notifications so only one is sent
